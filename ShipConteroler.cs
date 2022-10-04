@@ -4,33 +4,36 @@ using UnityEngine;
 
 public class ShipConteroler : MonoBehaviour
 {
-    
+    #region public variable
     public float _Speed = 0.01f;
-    
-    void Start()
+
+    #endregion
+    #region private variable
+    #endregion
+
+
+    #region private Method
+    private void Start()
     {
-        
+
     }
-    void Update()
+    private void Update()
     {
         // you can not intiallize variable in unity directly you need to use vectore3 var for intiallize them...
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-        transform.position += new Vector3( h,v, 0f)*Time.deltaTime;
-        if (transform.position.x < -8.12f)
-        {
-            Vector3 SaveDataOfMinNegspos= transform.position;
-            SaveDataOfMinNegspos.x = -8.12f;
-            transform.position = SaveDataOfMinNegspos;
-        }
-        if (transform.position.x > 8.17f)
-        {
-            Vector3 SaveDataOfMaxPosespos = transform.position;
-            SaveDataOfMaxPosespos.x = 8.17f;
-            transform.position = SaveDataOfMaxPosespos;
-        }
-
-
-        
+        transform.position += new Vector3(h, v, 0f) * _Speed * Time.deltaTime;
+        //using Calm for limitiation Code
+        limitThePositionOfPlayer();
     }
+
+    private void limitThePositionOfPlayer()
+    {
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -8.12f, 8.17f)
+            , Mathf.Clamp(transform.position.y, -4.14f, 4.23f), transform.position.z);
+    }
+
+    #endregion
+
+
 }//class

@@ -39,6 +39,10 @@ public class ShipConteroler : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -8.12f, 8.17f)
             , Mathf.Clamp(transform.position.y, -4.14f, 4.23f), transform.position.z);
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("collision happen");
+    }
 
     #endregion
 

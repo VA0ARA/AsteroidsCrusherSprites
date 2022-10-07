@@ -12,6 +12,7 @@ public class BulletController : MonoBehaviour
     #region public variable
     public float speed;
     public BullteDirection direction;
+    public GameObject explotionPrefabs;
     #endregion
 
     #region private variable
@@ -39,10 +40,11 @@ public class BulletController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-       
-
-            Destroy(collision.gameObject);
+        //collision>> object we coltion with it .contacts[0]>>list noghte barkhord avalin barkhord chon sefre.point>> mokhtasate mahale barkhord
+        Instantiate(explotionPrefabs, collision.contacts[0].point, Quaternion.identity);
+        Destroy(collision.gameObject);
             Destroy(gameObject);
+        
       
 
 

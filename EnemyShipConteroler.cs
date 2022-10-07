@@ -7,6 +7,9 @@ public class EnemyShipConteroler : MonoBehaviour
     #region public variables
     public float VerticalSpeed;
     public float Hspeed;
+    public GameObject bulletprefabs;
+    public Vector2 TimeTofire;
+    public GameObject Gun;
     #endregion
     #region private variable
     private int Direction;// 1>right, -1>left, 0
@@ -25,6 +28,7 @@ public class EnemyShipConteroler : MonoBehaviour
     private void Start()
     {
         InvokeRepeating("ChangeDirection", 1, 0.5f);
+        InvokeRepeating("Fire", TimeTofire.x, TimeTofire.y);
     }
     private void Update()
     {
@@ -38,6 +42,11 @@ public class EnemyShipConteroler : MonoBehaviour
     private void ChangeDirection()
     {
         Direction = Random.Range(-1, 2); //-1, 1 ,0
+    }
+    private void Fire()
+    {
+        Instantiate(bulletprefabs, Gun.transform.position, Quaternion.identity);
+
     }
     #endregion
 

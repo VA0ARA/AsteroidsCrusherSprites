@@ -41,7 +41,7 @@ public class ShipConteroler : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("collision happen");
+        //Debug.Log("collision happen");
     }
 
     #endregion

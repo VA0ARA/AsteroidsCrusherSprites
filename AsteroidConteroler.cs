@@ -7,6 +7,7 @@ public class AsteroidConteroler : MonoBehaviour
     #region public variabels
     public float Speed;
     public float RotationSpeed;
+    public float health;
     #endregion
     #region private variabels 
     #endregion
@@ -19,6 +20,10 @@ public class AsteroidConteroler : MonoBehaviour
         transform.position += Vector3.down * Speed * Time.deltaTime;
         //roatate a long a Z axes
         transform.Rotate(Vector3.forward * RotationSpeed * Time.deltaTime);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
     #endregion
 

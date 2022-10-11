@@ -10,6 +10,7 @@ public class EnemyShipConteroler : MonoBehaviour
     public GameObject bulletprefabs;
     public Vector2 TimeTofire;
     public GameObject Gun;
+    public int power;
     #endregion
     #region private variable
     private int Direction;// 1>right, -1>left, 0

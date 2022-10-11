@@ -7,7 +7,7 @@ public class ShipConteroler : MonoBehaviour
     #region public variable
     public float _Speed = 0.01f;
     public GameObject BulletPrefabs;
-    public GameObject Gun;
+    public GameObject[] Guns;
     public int Health
     {
         get { return _health; }//just read it if we use set means you can chang it ....
@@ -34,11 +34,21 @@ public class ShipConteroler : MonoBehaviour
         transform.position += new Vector3(h, v, 0f) * _Speed * Time.deltaTime;
         //using Calm for limitiation Code
         CkeckSpaceShipOutOfBound();
-      if ( Input.GetKeyDown(KeyCode.Space)){
+      if ( Input.GetKeyDown(KeyCode.Space))
+        {
             // instance object that call Bullte
-            Instantiate(BulletPrefabs,Gun.transform.position,Quaternion.identity);
+            Fire();
 
         }
+    }
+
+    private void Fire()
+    {
+        for (int i = 0; i < Guns.Length; i ++)
+        {
+            Instantiate(BulletPrefabs, Guns[i].transform.position, Quaternion.identity);
+        }
+        
     }
 
     private void CkeckSpaceShipOutOfBound()
@@ -48,10 +58,30 @@ public class ShipConteroler : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Debug.Log("collision happen");
-        if(collision.gameObject.tag=="Bullet_ Enemy ")
+        Debug.Log("collision happen");
+        if(collision.gameObject.tag== "Bullet_Enemy")
         {
-
+            Debug.Log("kamkon");
+            _health -= collision.gameObject.GetComponent<BulletController>().Power;
+            CheckHealth();
+        }
+        else if (collision.gameObject.tag == "Astroid")
+        {
+            _health -= collision.gameObject.GetComponent<AsteroidConteroler>().health;
+            CheckHealth();
+        }
+        else if (collision.gameObject.tag == "ShipEnemy")
+        {
+            _health -= collision.gameObject.GetComponent<EnemyShipConteroler>().power;
+            CheckHealth();
+        }
+    }
+    private void CheckHealth()
+    {
+        if (_health <= 0)
+        {
+            // need to improve
+            Destroy(gameObject);
         }
     }
 

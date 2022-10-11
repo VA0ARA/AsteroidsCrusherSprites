@@ -12,12 +12,14 @@ public class ShipConteroler : MonoBehaviour
     {
         get { return _health; }//just read it if we use set means you can chang it ....
     }
+    public float fireRate=0;
 
 
     #endregion
     #region private variable
     [SerializeField]
     private int _health;
+    private float lastShot=0;
     #endregion
 
 
@@ -44,10 +46,18 @@ public class ShipConteroler : MonoBehaviour
 
     private void Fire()
     {
-        for (int i = 0; i < Guns.Length; i ++)
+        //Time.time means how many time spend during game... 
+      
+        if (Time.time>fireRate + lastShot)
         {
-            Instantiate(BulletPrefabs, Guns[i].transform.position, Quaternion.identity);
+            for (int i = 0; i < Guns.Length; i++)
+            {
+                Instantiate(BulletPrefabs, Guns[i].transform.position, Quaternion.identity);
+            }
+            lastShot = Time.time;
+
         }
+
         
     }
 

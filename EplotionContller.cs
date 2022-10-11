@@ -9,6 +9,7 @@ public class EplotionContller : MonoBehaviour
     private Animator anim;
     #endregion
     #region public Variable
+    
     #endregion
     #region private Method
     private void Start()

@@ -9,10 +9,12 @@ public class AsteroidConteroler : MonoBehaviour
     public float RotationSpeed;
     public int  health;
     public GameObject Explotionprefabs;
+    public Sprite[] healthSprite;
     #endregion
     #region private variabels 
     private const string ANIMATION_NAME = "Health";
     private Animator anim;
+    private SpriteRenderer spRenderer;
     #endregion
     #region public Method
     #endregion
@@ -20,6 +22,7 @@ public class AsteroidConteroler : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        spRenderer = GetComponent<SpriteRenderer>();
     }
     private void Update()
     {
@@ -27,12 +30,12 @@ public class AsteroidConteroler : MonoBehaviour
         transform.position += Vector3.down * Speed * Time.deltaTime;
         //roatate a long a Z axes
         transform.Rotate(Vector3.forward * RotationSpeed * Time.deltaTime);
-        anim.SetInteger(ANIMATION_NAME, health);
+        
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         health = health - collision.gameObject.GetComponent<BulletController>().Power;
-
+        
         CheckHealth();
     }
     private void CheckHealth()
@@ -42,6 +45,27 @@ public class AsteroidConteroler : MonoBehaviour
             Instantiate(Explotionprefabs, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
+        else
+        {
+            DoAnimationOrChangeSprite();
+        }
+    }
+    private void DoAnimationOrChangeSprite()
+    {
+        if (anim != null)
+        {
+            anim.SetInteger(ANIMATION_NAME, health);
+        }
+        else
+        {
+            ChangeSprite();
+        }
+
+    }
+    private void ChangeSprite()
+    {
+        spRenderer.sprite = healthSprite[health-1];
+
     }
     #endregion
 

@@ -8,9 +8,16 @@ public class ShipConteroler : MonoBehaviour
     public float _Speed = 0.01f;
     public GameObject BulletPrefabs;
     public GameObject Gun;
+    public int Health
+    {
+        get { return _health; }//just read it if we use set means you can chang it ....
+    }
+
 
     #endregion
     #region private variable
+    [SerializeField]
+    private int _health;
     #endregion
 
 
@@ -42,6 +49,10 @@ public class ShipConteroler : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log("collision happen");
+        if(collision.gameObject.tag=="Bullet_ Enemy ")
+        {
+
+        }
     }
 
     #endregion

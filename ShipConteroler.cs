@@ -13,6 +13,7 @@ public class ShipConteroler : MonoBehaviour
         get { return _health; }//just read it if we use set means you can chang it ....
     }
     public float fireRate=0;
+    public Animator falmeAnimatore;
 
 
     #endregion
@@ -20,6 +21,7 @@ public class ShipConteroler : MonoBehaviour
     [SerializeField]
     private int _health;
     private float lastShot=0;
+    private const string FLAME_ANIMATION = "speed";
     #endregion
 
 
@@ -33,7 +35,9 @@ public class ShipConteroler : MonoBehaviour
         // you can not intiallize variable in unity directly you need to use vectore3 var for intiallize them...
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-        transform.position += new Vector3(h, v, 0f) * _Speed * Time.deltaTime;
+        Vector3 Move= new Vector3(h, v, 0f) * _Speed * Time.deltaTime; ;
+        transform.position += Move;
+        falmeAnimatore.SetFloat(FLAME_ANIMATION, Move.sqrMagnitude);//sqrMagnitude means fisaghorays vatar 
         //using Calm for limitiation Code
         CkeckSpaceShipOutOfBound();
       if ( Input.GetKeyDown(KeyCode.Space))

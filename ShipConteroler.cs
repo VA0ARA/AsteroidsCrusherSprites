@@ -100,6 +100,13 @@ public class ShipConteroler : MonoBehaviour
     }
 
     #endregion
+    #region Public Method
+    public void FireButtom()
+    {
+        Fire();
+
+    }
+    #endregion
 
 
 }//class

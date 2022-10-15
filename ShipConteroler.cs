@@ -22,6 +22,8 @@ public class ShipConteroler : MonoBehaviour
     private int _health;
     private float lastShot=0;
     private const string FLAME_ANIMATION = "speed";
+    private float h;
+    private float v;
     #endregion
 
 
@@ -33,18 +35,43 @@ public class ShipConteroler : MonoBehaviour
     private void Update()
     {
         // you can not intiallize variable in unity directly you need to use vectore3 var for intiallize them...
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        Vector3 Move= new Vector3(h, v, 0f) * _Speed * Time.deltaTime; ;
+        // h = Input.GetAxis("Horizontal");
+        // v = Input.GetAxis("Vertical");
+        CheckinoutButtom();
+        Vector3 Move = new Vector3(h, v, 0f) * _Speed * Time.deltaTime; ;
         transform.position += Move;
         falmeAnimatore.SetFloat(FLAME_ANIMATION, Move.sqrMagnitude);//sqrMagnitude means fisaghorays vatar 
         //using Calm for limitiation Code
         CkeckSpaceShipOutOfBound();
-      if ( Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             // instance object that call Bullte
             Fire();
 
+        }
+    }
+
+    private void CheckinoutButtom()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            MoveLeft();
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            MoveRight();
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            MoveUp();
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            MoveDown();
+        }
+        if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
+        {
+            StopMoving();
         }
     }
 
@@ -105,6 +132,28 @@ public class ShipConteroler : MonoBehaviour
     {
         Fire();
 
+    }
+    public void MoveUp()
+    {
+        v = 1;
+        
+    }
+    public void MoveDown()
+    {
+        v = -1;
+    }
+    public void MoveRight()
+    {
+        h = 1;
+    }
+    public void MoveLeft()
+    {
+        h = -1;
+    }
+    public void StopMoving()
+    {
+        v = 0;
+        h = 0;
     }
     #endregion
 

@@ -35,7 +35,7 @@ public class AsteroidConteroler : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         health = health - collision.gameObject.GetComponent<BulletController>().Power;
-        
+
         CheckHealth();
     }
     private void CheckHealth()

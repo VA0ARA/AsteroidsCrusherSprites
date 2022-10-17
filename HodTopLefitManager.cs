@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class HodTopLefitManager : MonoBehaviour
 {
     #region public variable
-    public Text txtHealthpercent;
-    public Text txtScore;
+    public TextMesh txtHealthpercent;
+    public TextMesh txtScore;
     #endregion
     #region private variable
     #endregion
